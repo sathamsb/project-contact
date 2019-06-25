@@ -2,65 +2,69 @@ import re
 
 class Contact:
     
+    def __init__(self):
+        self.File_Path = "D:\project contact\Contact.txt"
+        
     def insert(self):
-        p = "D:\project contact\Contact.txt"
-        f = open(p,'a')
+        
+        file = open(self.File_Path,'a')
         self.name = input("Enter Name: ")
         self.number = input("Enter Number: ")
-        f.write(self.name+" "+self.number+"\n")
+        file.write(self.name+" "+self.number+"\n")
         print("Contact Saved Succesfully!")
-        f.close()
+        file.close()
         
     def display(self):
-        p = "D:\project contact\Contact.txt"
-        g = open(p,'r')
+        
+        file = open(self.File_Path,'r')
         print("\nContact List\n")
-        for x in g:
+        for x in file:
           print(x)
-        g.close()
+        file.close()
         
     def delete(self):
-        p = "D:\project contact\Contact.txt"
-        c = input("Enter name or number: ")
-        l = len(c)
-        with open(p,"r") as f:
-            lines = f.readlines()
-        substrc = c[0:l]
-        f.close()
-        with open(p,"w") as f:
+        
+        name = input("Enter name : ")
+        l = len(name)
+        with open(self.File_Path,"r") as file:
+            lines = file.readlines()
+        substrc = name[0:l]
+        file.close()
+        with open(self.File_Path,"w") as file:
             for i in lines:
                 substr = i[0:l]
                 if substr != substrc:
-                    f.write(i)
-                    print("\nContact deleted!\n")
-        f.close()
+                    file.write(i)
+            print("\nContact deleted!\n")
+        file.close()
         
     def import_list(self):
-        p = "D:\project contact\Contact.txt"
-        with open(p,"r") as f:
-            lines = f.readlines()
+        
+        with open(self.File_Path,"r") as file:
+            lines = file.readlines()
         print("\nContact imported Succesfully!\n")
-        f.close
+        file.close()
         
     def export_list(self):
-        p = "D:\project contact\Contact.txt"
-        with open(p,"r") as f:
-            lines = f.readlines()
-        with open(p,"a") as f:
+        
+        with open(self.File_Path,"r") as file:
+            lines = file.readlines()
+        with open(self.File_Path,"a") as file:
             for i in lines:
-                f.write(i)
+                file.write(i)
         print("\nContact Exported Succesfully!\n")
-        f.close
+        file.close()
         
     def find(self):
-        p = "D:\project contact\Contact.txt"
-        with open(p,"r") as f:
-            lines = f.readlines()
-        k = input("Enter name to search:").lower()
+        
+        with open(self.File_Path,"r") as file:
+            lines = file.readlines()
+        name = input("Enter name to search:").lower()
         for i in lines:
-            z = re.match(k,i.lower())
-            if z:
+            find = re.match(name,i.lower())
+            if find:
                 print(i)
+        file.close()
             
         
     
